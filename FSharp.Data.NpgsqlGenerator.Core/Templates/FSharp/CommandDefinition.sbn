@@ -1,0 +1,25 @@
+override this.{{ command.function_name }} {{ # spaceholder }}
+    {{- if !command.top_level_connections -}} 
+    (conn: NpgsqlConnection) {{ #spaceholder }}
+    {{- else if command.parameters.is_empty -}}
+    () {{ # spaceholder }}
+    {{- end -}}
+    {{- for parameter in command.parameters -}}
+    ({{ parameter.safe_name -}}: {{ parameter.clr_type }}) {{ #spaceholder }}
+    {{- end -}} =
+    use command = conn.CreateCommand()
+    command.CommandText <- """{{ command.text }}"""
+    
+    {{- for parameter in command.parameters }}
+    command.Parameters.Add(NpgsqlParameter(
+        ParameterName = "{{ parameter.name }}",
+        DataTypeName = "{{ parameter.data_type_name }}",
+        {{- if parameter.is_enum }}
+        Value = {{ parameter.serializer_name }}({{ parameter.safe_name }})
+        {{- else }}
+        Value = {{ parameter.safe_name }}
+        {{- end }}
+    ))
+    |> ignore
+    {{- end }}
+    {{ include 'ReadDataReader' command }}

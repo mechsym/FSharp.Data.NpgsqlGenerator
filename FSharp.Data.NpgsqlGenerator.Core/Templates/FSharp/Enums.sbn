@@ -1,0 +1,7 @@
+{{- for schema in schemas }}
+namespace {{ namespace }}.{{ schema.schema }}
+{{- for enum in  schema.enums }}
+{{ include 'Enum' enum }}
+{{ include 'EnumExtension' enum }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,41 @@
+override this.{{ command.prepare_function_name }} {{ #spaceholder }} 
+    {{- if command.top_level_connections -}}
+    () 
+    {{- else -}}
+    (conn: NpgsqlConnection)
+    {{- end }} =
+    task {
+        let command = conn.CreateCommand()
+        command.CommandText <- """{{ command.text }}"""
+        {{- for parameter in command.parameters }}
+        command.Parameters.Add(NpgsqlParameter
+        (
+            ParameterName = "{{ parameter.name }}",
+            DataTypeName = "{{ parameter.data_type_name }}",
+            Value = null
+        )) |> ignore
+        {{- end }}
+        do! command.PrepareAsync()
+        return
+            { new {{ command.prepared_interface_name }} with
+                member this.Execute {{ # spaceholder }}
+                    {{- if command.parameters.is_empty -}}
+                    () {{ #spaceholder }}
+                    {{- else -}}
+                    {{- for parameter in command.parameters -}}
+                    ({{ parameter.safe_name }}: {{ parameter.clr_type }}) {{ #spaceholder }}
+                    {{- end -}}
+                    {{- end }}= 
+                        {{- for parameter in command.parameters }}
+                        {{- if parameter.is_enum }}
+                        command.Parameters["{{ parameter.name }}"].Value <- {{ parameter.serializer_name }}({{ parameter.safe_name }})
+                        {{- else }}
+                        command.Parameters["{{ parameter.name }}"].Value <- {{ parameter.safe_name }}
+                        {{- end }}
+                        {{- end }}
+                        {{ include 'ReadDataReader' command }}
+              interface IAsyncDisposable with
+                member this.DisposeAsync() = 
+                    command.DisposeAsync() }
+                    
+    }

@@ -1,0 +1,63 @@
+{{ if command.result.is_non_query -}}
+command.ExecuteNonQueryAsync()
+{{- else -}}
+task {
+    use! reader = command.ExecuteReaderAsync()
+{{- if command.single_row }}
+    let! rowRead = reader.ReadAsync()
+    if rowRead then
+        return Some({%{{}%}{{ if command.result.is_anonymous }}|{{ end }} 
+        {{- for column in command.result.result_columns }}
+            {{ column.name }} = {{ #spaceholder }}
+                {{- if column.nullable }} 
+                if reader.IsDBNull({{ column.ordinal }}) then {{ #spacekiller -}} None
+                else {{ #spaceholder }} 
+                    {{- if column.is_enum -}}
+                    Some({{ column.deserializer_name }} (reader.{{ column.getter_name }}({{ column.ordinal }})))
+                    {{- else -}}
+                    Some(reader.{{ column.getter_name }}({{ column.ordinal }}))
+                    {{- end }}
+                {{- else }} 
+                    {{- if column.is_enum -}}
+                    {{- column.deserializer_name }}(reader.{{ column.getter_name }}({{ column.ordinal }}))
+                    {{- else -}}
+                    reader.{{ column.getter_name }}({{ column.ordinal }}) 
+                    {{- end }}
+                {{- end }}
+        {{- end }}
+        {{ if command.result.is_anonymous }}|{{ end }}{%{}}%}{{ if !command.result.is_anonymous }}: {{ command.result.return_record_type_name }}{{ end }}) 
+    else
+        return None 
+{{- else }}
+    let result = ResizeArray<_>()
+    let mutable rowsRemain = false
+    let! rowsRemain2 = reader.ReadAsync()
+    rowsRemain <- rowsRemain2
+    while rowsRemain do
+        result.Add({%{{}%}{{ if command.result.is_anonymous }}|{{ end }} 
+        {{- for column in command.result.result_columns }}
+            {{ column.name }} = {{ #spaceholder }}
+                {{- if column.nullable }} 
+                if reader.IsDBNull({{ column.ordinal }}) then None
+                else {{ #spaceholder -}} 
+                {{- if column.is_enum -}}
+                    Some({{ column.deserializer_name }}(reader.{{ column.getter_name }}({{ column.ordinal }})))
+                {{- else -}}
+                    Some(reader.{{ column.getter_name }}({{ column.ordinal }}))
+                {{- end }}
+                {{- else }} 
+                {{- if column.is_enum -}}
+                {{- column.deserializer_name }}(reader.{{ column.getter_name }}({{ column.ordinal }}))
+                {{- else -}}
+                reader.{{ column.getter_name }}({{ column.ordinal }}) 
+                {{- end }}
+                {{- end }} 
+        {{- end }}
+        {{ if command.result.is_anonymous }}|{{ end }}{%{}}%}{{ if !command.result.is_anonymous }}: {{ command.result.return_record_type_name }}{{ end }})
+        let! rowsRemain2 = reader.ReadAsync()
+        rowsRemain <- rowsRemain2
+    
+    return result :> IEnumerable<_>
+{{- end }}
+}
+{{- end -}}

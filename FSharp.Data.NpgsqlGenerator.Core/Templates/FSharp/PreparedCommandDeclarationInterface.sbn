@@ -1,0 +1,11 @@
+type {{ command.prepared_interface_name }} =
+    abstract member Execute: {{ # spaceholder }}
+        {{- if command.parameters.is_empty -}}
+        unit
+        {{- else -}}
+        {{- for parameter in command.parameters -}}
+        {{- if !for.first }} -> {{ end }}{{ parameter.safe_name}}: {{ parameter.clr_type }} 
+        {{- end -}} 
+        {{- end -}}{{ # spaceholder }} -> {{ include 'CommandResult' command.result }}
+    inherit IAsyncDisposable
+    

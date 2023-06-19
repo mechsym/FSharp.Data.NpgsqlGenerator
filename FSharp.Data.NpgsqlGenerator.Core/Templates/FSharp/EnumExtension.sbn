@@ -1,0 +1,4 @@
+module {{ enum.name }} =
+    {{ include 'EnumSerializerExtension' enum }}
+    
+    {{ include 'EnumDeserializerExtension' enum }}

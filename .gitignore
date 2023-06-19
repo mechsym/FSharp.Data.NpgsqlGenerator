@@ -1,0 +1,13 @@
+.idea
+*/**/bin
+*/**/obj
+nuget.config
+.vscode/
+.globalconfig
+.fake/
+
+.paket/
+
+packages/
+publish/
+*/**/AssemblyInfo.*

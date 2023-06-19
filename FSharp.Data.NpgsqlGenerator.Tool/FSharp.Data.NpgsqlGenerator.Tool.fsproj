@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>FSharp.Data.NpgsqlGenerator.Tool</RootNamespace>
+        <PackageId>npgsql-generator</PackageId>
+        <Authors>MechSym</Authors>
+        <IsPackable>true</IsPackable>
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>npgsql-generator</ToolCommandName>
+        <RepositoryUrl>https://github.com/mechsym/FSharp.Data.NpgsqlGenerator</RepositoryUrl>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="AssemblyInfo.fs" />
+        <Compile Include="CLI.fs" />
+        <Compile Include="Program.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Thoth.Json.Net" Version="8.0.0" />
+        <ProjectReference Include="..\FSharp.Data.NpgsqlGenerator.Core\FSharp.Data.NpgsqlGenerator.Core.fsproj" />
+        <PackageReference Include="Argu" Version="6.1.1" />
+    </ItemGroup>
+</Project>

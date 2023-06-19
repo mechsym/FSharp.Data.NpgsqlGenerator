@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>FSharp.Data.NpgsqlGenerator.Core</RootNamespace>
+        <PackageId>FSharp.Data.NpgsqlGenerator.Core</PackageId>
+        <Authors>MechSym</Authors>
+        <IsPackable>true</IsPackable>
+        <RepositoryUrl>https://github.com/mechsym/FSharp.Data.NpgsqlGenerator</RepositoryUrl>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="4.6.0" />
+        <PackageReference Include="Humanizer.Core" Version="2.11.10" />
+        <PackageReference Include="Npgsql" Version="7.0.0" />
+        <PackageReference Include="Scriban" Version="5.5.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="AssemblyInfo.fs" />
+        <Compile Include="Inference.fs" />
+        <Compile Include="Schema.fs" />
+        <Compile Include="TemplateModels.fs" />
+        <Compile Include="EnumGenerator.fs" />
+        <Compile Include="RepositoryGenerator.fs" />
+        <EmbeddedResource Include="Templates\FSharp\Enum.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\EnumSerializerExtension.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\EnumDeserializerExtension.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\EnumExtension.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\Enums.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\CommandResult.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\ResultRecordDeclaration.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\PreparedCommandDeclarationInterface.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\PreparedCommandDeclaration.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\CommandDeclaration.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\RepositoryInterface.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\ReadDataReader.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\CommandDefinition.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\PreparedCommandDefinition.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\RepositoryImplementation.sbn" />
+        <EmbeddedResource Include="Templates\FSharp\Repository.sbn" />
+    </ItemGroup>
+
+</Project>

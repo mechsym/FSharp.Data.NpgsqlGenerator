@@ -1,0 +1,17 @@
+{{- for command in model.commands }}
+{{- if !command.result.is_anonymous && !command.result.is_non_query }}
+{{ include 'ResultRecordDeclaration' command }}
+{{- end }}
+
+{{- if command.prepared }}
+{{ include 'PreparedCommandDeclarationInterface' command }}
+{{- end }}
+{{- end }}
+type {{ model.interface_name }} = 
+{{- for command in model.commands }}
+    {{- if command.prepared }}
+    {{ include 'PreparedCommandDeclaration' command }}
+    {{- else }}
+    {{ include 'CommandDeclaration' command }}
+    {{- end }}
+{{ end }}

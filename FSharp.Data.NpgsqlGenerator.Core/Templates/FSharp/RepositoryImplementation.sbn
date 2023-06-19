@@ -1,0 +1,20 @@
+module {{ model.implementation_class_name }} =
+
+    {{~ if model.top_level_connections }}
+    let create (conn: NpgsqlConnection) =
+    {{- else }}
+    let create () =
+    {{- end }}
+        { new {{ model.interface_name }} with 
+ 
+            {{- for command in model.commands }}           
+            {{- if command.prepared }}
+            {{ include 'PreparedCommandDefinition' command }}
+            {{- else }}
+            {{ include 'CommandDefinition' command }}
+            {{- end }}
+            {{- end }}
+        }
+    {{~ if !model.top_level_connections }}
+    let instance = create ()
+    {{- end }}

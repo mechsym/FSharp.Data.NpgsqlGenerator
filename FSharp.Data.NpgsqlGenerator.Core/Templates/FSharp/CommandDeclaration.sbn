@@ -1,0 +1,13 @@
+abstract member {{ command.function_name }}: {{ # spaceholder }} 
+    {{- if command.top_level_connections -}}
+        {{- if command.parameters.is_empty -}} 
+        unit
+        {{- else -}} 
+            {{- for parameter in command.parameters -}} 
+            {{ if !for.first }} -> {{ end }}{{ parameter.safe_name }}: {{ parameter.clr_type }}
+            {{- end -}} 
+        {{- end -}}
+    {{- else -}}
+        conn: NpgsqlConnection{{ for parameter in command.parameters }} -> {{ parameter.safe_name }}: {{ parameter.clr_type }}{{ end }}
+    {{- end -}} 
+    {{ #spaceholder }} -> {{ include 'CommandResult' command.result }}

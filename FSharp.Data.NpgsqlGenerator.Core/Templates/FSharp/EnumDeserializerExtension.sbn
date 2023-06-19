@@ -1,0 +1,5 @@
+let fromString: string -> {{ enum.name }} = function
+    {{- for label in enum.labels }}
+    | "{{ label.db_label }}" -> {{ enum.name }}.{{ label.label }}
+    {{- end }}
+    | x -> failwith $"Unknown label for '{{ enum.name }}': '{x}'"

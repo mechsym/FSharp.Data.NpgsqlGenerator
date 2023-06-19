@@ -1,0 +1,4 @@
+let toString : {{ enum.name }} -> string = function
+    {{- for label in enum.labels }}
+    | {{ enum.name }}.{{ label.label }} -> "{{ label.db_label }}"
+    {{- end }}

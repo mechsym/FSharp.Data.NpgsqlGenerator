@@ -1,0 +1,11 @@
+namespace {{ model.namespace }}
+
+open Npgsql
+open System
+open System.Threading.Tasks
+open System.Collections.Generic
+
+{{- # repository interface }}
+{{ include 'RepositoryInterface' model }}
+
+{{ include 'RepositoryImplementation' model }}

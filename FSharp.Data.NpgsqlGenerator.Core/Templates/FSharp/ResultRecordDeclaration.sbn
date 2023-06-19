@@ -1,0 +1,6 @@
+type {{ command.result.return_record_type_name }} = { 
+    {{- for column in command.result.result_columns }}
+        {{ column.name }}: {{ column.clr_type }}
+    {{- end }}
+    }
+    

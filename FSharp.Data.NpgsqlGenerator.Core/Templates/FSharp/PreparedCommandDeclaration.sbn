@@ -1,0 +1,6 @@
+abstract member {{ command.prepare_function_name }}: {{ #spaceholder }}
+    {{- if command.top_level_connections -}} 
+        unit 
+    {{- else -}} 
+        NpgsqlConnection 
+    {{- end }} -> {{ command.prepare_function_return_type }}

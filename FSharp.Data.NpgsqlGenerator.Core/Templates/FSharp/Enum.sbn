@@ -1,0 +1,7 @@
+/// {{ enum.db_name }}
+[<RequireQualifiedAccess>]
+type {{ enum.name }} =
+    {{- for label in enum.labels }}
+    /// {{ label.db_label}}
+    | {{ label.label }}
+    {{- end }}
