@@ -3,7 +3,7 @@
 ## What is it
 
 `npgsql-generator` is a `dotnet` SDK tool that tries to mix the best aspects of type providers, source generators and
-dapper to provide a convenient **type safe** and very fast ORM solution.
+dapper to provide a convenient **type safe** and very fast ORM solution that is **unit testable**.
 
 ### How it works
 
@@ -263,7 +263,8 @@ It accepts a few further options:
 - `--udf-namespace`: the namespace to put the enum types into
 - `--output-path`: where to place the generated files
 - `--top-level-connections`: normally each operation accepts an `NpgsqlConnection` parameter in the generated code. If
-  you set this flag, the generated Repository will accept the connection and not the individual operations.
+  you set this flag, the generated Repository will accept the connection and not the individual operations. (= the
+  generated interfaces are 100% decoupled from even Npgsql)
 - `--record-return-types`: normally each operation will return an anonymous record. If you set this flag, non-anonymous
   records will be generated.
 
