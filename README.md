@@ -1,6 +1,6 @@
 # npgsql-generator
 
-## What is it
+## Description
 
 `npgsql-generator` is a `dotnet` SDK tool that mixes the best aspects of [type providers](https://github.com/demetrixbio/FSharp.Data.Npgsql), source generators and
 [Dapper](https://github.com/DapperLib/Dapper) to provide a convenient, **type safe** and very fast ORM solution that is **unit testable**.
