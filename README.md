@@ -172,10 +172,6 @@ Right after the metadata section comes the SQL query itself. The syntax of the q
 it is possible to provide parameters using `@` character, like `@ids` in the above example. Basically, the syntax for
 the query is the same as `NpgslCommand.CommandText` property as the query is literally being passed to it eventually.
 
-This readme uses simple examples to showcase the possibilities of the tool so the example SQL queries are using a single table. 
-In fact, the tool is not limiting in the complexity of the query at all, so it is absolutely possible to use recursion, 
-common table expressions and joins. Basically anything that is possible within Postgres.
-
 ### Generating code
 
 Once the repository file is ready, it's time to generate code.
@@ -344,3 +340,13 @@ thing so whether `npgsql-generator` is for you highly depends on your preference
   and `npgsql-generator` can coexist in the same project and you can rely on Dapper for dynamic queries and
   on `npgsql-generator` for non dynamic ones
 - `Dapper` supports multiple database platforms while `npgsql-generator` does not and that is unlikely to change
+
+## Further considerations
+
+- This readme uses simple examples to showcase the possibilities of the tool so the example SQL queries are using a single table. 
+In fact, the tool is not limiting in the complexity of the query at all, so it is absolutely possible to use recursion, 
+common table expressions and joins. Basically anything that is possible within Postgres
+- In the concepts section, the concept of a repository being a set of operations that relate to a
+  single table is just a recommendation. The `npgsql-generator` doesn't do any enforcement of these concepts. It is absolutely
+   possible to have one operation to operate on multiple tables and multiple operations within the same repository to operate on different tables.
+
