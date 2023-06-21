@@ -29,7 +29,7 @@ where email = @email;
 
 - infers the type and nullability of input and output parameters
 - based on preferences, generates corresponding anonymous, or non-anonymous records to read the output into
-- generates functions that execute the commands using plain, low level `Npgsql` code, without further dependencies. Does all the ceremony around Npgsql.
+- generates functions that execute the commands using plain, low level `Npgsql` code, without adding further dependencies. Basically does all the ceremony around Npgsql.
 
 The generated code looks like this:
 
