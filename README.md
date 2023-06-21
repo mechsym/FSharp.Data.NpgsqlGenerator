@@ -172,6 +172,10 @@ Right after the metadata section comes the SQL query itself. The syntax of the q
 it is possible to provide parameters using `@` character, like `@ids` in the above example. Basically, the syntax for
 the query is the same as `NpgslCommand.CommandText` property as the query is literally being passed to it eventually.
 
+This readme uses simple examples to showcase the possibilities of the tool so the example SQL queries are using a single table. 
+In fact, the tool is not limiting in the complexity of the query at all, so it is absolutely possible to use recursion, 
+common table expressions and joins. Basically anything that is possible within Postgres.
+
 ### Generating code
 
 Once the repository file is ready, it's time to generate code.
