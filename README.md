@@ -78,22 +78,22 @@ module UserRepository =
 
 ## Motivations
 
-If You look closer, `npgsql-generator` highly resembles a type provider project, in fact, it was grown out of an
+If you look closer, `npgsql-generator` highly resembles a type provider project, in fact, it was grown out of an
 existing type provider project: [FSharp.Data.Npgsql](https://github.com/demetrixbio/FSharp.Data.Npgsql). Quite some
 code, especially the inference was taken from there so `FSharp.Data.Npgsql` could be considered as the spiritual
 ancestor of `npgsql-generator`. (many thanks to its authors and contributors!)
 
-There were quite some lessons learnt while working with `FSharp.Data.Npgsql` and with type providers in general and the
-most important one was how much perf overhead they impose on the IDE if You have a project of a certain
-size. `npgsql-generator` is
-trying to mitigate that overhead by sacrificing some developer convenience by moving the type generation to build time instead
-of design time. This results in a bit less instant feedback loop that You are used to when using type providers but also
-results in a much more predictable IDE performance while editing Your F# code. 
+Despite type providers being a brilliant idea in general as they give type safe data access that not many other solutions do, 
+there were quite some lessons learnt while working with them. The most important one was how much perf overhead they impose on 
+the IDE if you have a project of a certain size. `npgsql-generator` is trying to mitigate that overhead by sacrificing some 
+developer convenience by moving the type generation to build time instead of design time while keeping the essence of 
+type providers: type safety. This results in a bit less instant feedback loop that you are used to when using type providers but also
+results in a much more predictable IDE performance while editing F# code. 
 
-Additionally, You can get IDE help for the SQL 
-itself which was not possible with type providers. You had to edit the SQL externally if you wanted IDE help and copy the final text to the F# codebase.
+Additionally, you can get IDE help for the SQL itself which was not possible with type providers. You had to edit 
+the SQL externally if you wanted IDE help and copy the final text to the F# codebase.
 
-Apart from that, the generated code uses interfaces that Your code can rely on so an additional benefit is a much less
+Apart from that, the generated code uses interfaces that your code can rely on so an additional benefit is a much less
 coupled code with data access layer, compared to type providers. Unit testing became possible!
 
 ## Usage
