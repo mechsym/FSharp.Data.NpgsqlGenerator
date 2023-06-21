@@ -303,40 +303,40 @@ It accepts a few further optional flags:
 ## Comparison with other solutions
 
 From the below comparison, it clearly stands out that most of the statements could be seen both as positive or negative
-thing so whether `npgsql-generator` is for You highly depends on Your preference and the type of Your project.
+thing so whether `npgsql-generator` is for you highly depends on your preference and the type of your project.
 
 ### Type providers
 
-- unlike with type providers, You get IDE help, code completions when writing SQL since You are actually editing a Sql
+- unlike with type providers, you get IDE help, code completions when writing SQL since you are actually editing a Sql
   script
 - the generated code is plain Npgsql code which everyone is familiar with, there is no hidden dll somewhere on your computer
-- You can debug the generated code
+- you can debug the generated code
 - scales better on larger projects: in fact, the schema in the database changes very rarely, there is no need to
   constantly do roundtrips between the language server and the database to determine changes. However, on smaller
   projects, the ceremony that is required to set up `npgsql-generator` might be more than setting up a type provider.
-- Your code is much less coupled with db code, the `npgsql-generator` generates interfaces that Your code can depend on
+- your code is much less coupled with db code, the `npgsql-generator` generates interfaces that your code can depend on
 - unit testing is possible
-- it's not necessary to have a running postgres database on Your CI if You don't want
-- no runtime dependency, only Npgsql, and You are in charge for providing it
+- it's not necessary to have a running postgres database on your CI if You don't want
+- no runtime dependency, only Npgsql, and you are in charge for providing it
 
 ### EF and traditional ORM frameworks
 
-- with `npgsql-generator` You are in full control while traditional ORM solutions remove a lot of burden from You in
+- with `npgsql-generator` you are in full control while traditional ORM solutions remove a lot of burden from you in
   exchange for some additional overhead (this could be seen both as a negative or positive thing)
-- compared with *code-first* and *database-first* approaches, `npgsql-generator` sits in between as You are responsible
+- compared with *code-first* and *database-first* approaches, `npgsql-generator` sits in between as you are responsible
   for
-  shaping Your database schema (similar to database-first) but also You are guarded by type safety (similar to
+  shaping your database schema (similar to database-first) but also you are guarded by type safety (similar to
   code-first)
 - EF supports multiple database platforms while `npgsql-generator` does not and that is unlikely to change
 - Entity Framework and traditional ORM frameworks could be heavy and add quite some overhead due to internal
   synchronization and state management while `npgsql-generator` imposes no overhead at all compared to a situation where
-  You write Your own `Npgsql` code manually
+  you write Your own `Npgsql` code manually
 
 ### Dapper
 
 - `npgsql-generator` generates **type safe** code, schema changes in the database are automatically picked up. You
   are alone when using `Dapper` in this case
 - `Dapper` is more flexible, it supports dynamic queries while `npgsql-generator` does not. However, `Dapper`
-  and `npgsql-generator` can coexist in the same project and You can rely on Dapper for dynamic queries and
+  and `npgsql-generator` can coexist in the same project and you can rely on Dapper for dynamic queries and
   on `npgsql-generator` for non dynamic ones
 - `Dapper` supports multiple database platforms while `npgsql-generator` does not and that is unlikely to change
