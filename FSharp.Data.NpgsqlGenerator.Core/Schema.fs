@@ -53,6 +53,7 @@ module internal Builtins =
           "time", nameof (bar.GetTimeSpan)
           "time with time zone", nameof (bar.GetTimeSpan)
           "timetz", nameof (bar.GetDateTime)
+          "uuid", nameof (bar.GetGuid)
 
           //special value
           "enum", nameof (bar.GetString) ]
