@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <RootNamespace>FSharp.Data.NpgsqlGenerator.Core</RootNamespace>
         <PackageId>FSharp.Data.NpgsqlGenerator.Core</PackageId>
         <Authors>MechSym</Authors>
@@ -9,10 +9,10 @@
         <RepositoryUrl>https://github.com/mechsym/FSharp.Data.NpgsqlGenerator</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="FsToolkit.ErrorHandling" Version="4.6.0" />
-        <PackageReference Include="Humanizer.Core" Version="2.11.10" />
-        <PackageReference Include="Npgsql" Version="7.0.0" />
-        <PackageReference Include="Scriban" Version="5.5.0" />
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="5.2.0" />
+        <PackageReference Include="Humanizer.Core" Version="3.0.8" />
+        <PackageReference Include="Npgsql" Version="10.0.1" />
+        <PackageReference Include="Scriban" Version="6.5.5" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="AssemblyInfo.fs" />

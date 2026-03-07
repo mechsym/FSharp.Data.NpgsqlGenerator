@@ -11,3 +11,5 @@ nuget.config
 packages/
 publish/
 */**/AssemblyInfo.*
+bin
+obj

@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <RootNamespace>FSharp.Data.NpgsqlGenerator.Tool</RootNamespace>
         <PackageId>npgsql-generator</PackageId>
         <Authors>MechSym</Authors>
@@ -19,8 +19,8 @@
         <None Include="../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Thoth.Json.Net" Version="8.0.0" />
+        <PackageReference Include="Thoth.Json.Net" Version="12.0.0" />
         <ProjectReference Include="..\FSharp.Data.NpgsqlGenerator.Core\FSharp.Data.NpgsqlGenerator.Core.fsproj" />
-        <PackageReference Include="Argu" Version="6.1.1" />
+        <PackageReference Include="Argu" Version="6.2.5" />
     </ItemGroup>
 </Project>
